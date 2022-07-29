@@ -1,17 +1,33 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchApi } from '../redux/actions';
+import { fetchApi, fetchExpense } from '../redux/actions';
 
 class WalletForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      id: 0,
+      value: '',
+      description: '',
+      tag: 'Alimentação',
+      method: 'Dinheiro',
+      currency: 'USD',
+    };
+  }
+
   componentDidMount() {
     const { fetch } = this.props;
     fetch();
   }
 
+  handleChange = ({ target }) => {
+    this.setState({ [target.id]: target.value });
+  };
+
   render() {
-    const { currencies } = this.props;
-    console.log(currencies);
+    const { currencies, expenses } = this.props;
+    const { value, description, tag, method, currency } = this.state;
     return (
       <div>
         WalletForm
@@ -20,46 +36,83 @@ class WalletForm extends Component {
             Valor
             <input
               id="value"
+              type="number"
               data-testid="value-input"
+              value={ value }
+              onChange={ this.handleChange }
+              step=",01"
             />
           </label>
           <label htmlFor="description">
             Descrição
             <input
               id="description"
+              type="text"
               data-testid="description-input"
+              value={ description }
+              onChange={ this.handleChange }
             />
           </label>
           <select
-            id="coin"
+            id="currency"
             data-testid="currency-input"
+            value={ currency }
+            onChange={ this.handleChange }
           >
 
             {
               currencies
-                .map((elem, index) => <option key={ index }>{elem}</option>)
+                .map((elem, index) => (
+                  <option
+                    key={ index }
+                    value={ elem }
+                  >
+                    {elem}
+                  </option>
+                ))
 
             }
           </select>
           <select
             id="method"
             data-testid="method-input"
+            value={ method }
+            onChange={ this.handleChange }
           >
-            <option>Dinheiro</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
           <select
             id="tag"
             data-testid="tag-input"
+            value={ tag }
+            onChange={ this.handleChange }
           >
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </form>
+        <button
+          type="button"
+          onClick={ () => {
+            expenses(this.state);
+            this.setState((prev) => ({
+              id: prev.id + 1,
+              value: '',
+              description: '',
+              tag: 'Lazer',
+              method: 'Dinheiro',
+              currency: 'USD',
+            }));
+          } }
+        >
+          Adicionar despesa
+
+        </button>
       </div>
     );
   }
@@ -74,10 +127,12 @@ WalletForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   fetch: () => dispatch(fetchApi()),
+  expenses: (state) => dispatch(fetchExpense(state)),
 });
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  dataCoin: state.wallet.dataCoin,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

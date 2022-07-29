@@ -17,6 +17,12 @@ export const requestCoinFailure = (error) => ({
   error,
 });
 
+export const saveExpenses = (expenses, response) => ({
+  type: types.SAVE_EXPENSES,
+  expenses,
+  response,
+});
+
 export const fetchApi = () => async (dispatch) => {
   try {
     const response = await coinApi();
@@ -24,4 +30,9 @@ export const fetchApi = () => async (dispatch) => {
   } catch (error) {
     dispatch(requestCoinFailure(error));
   }
+};
+
+export const fetchExpense = (state) => async (dispatch) => {
+  const response = await coinApi();
+  return dispatch(saveExpenses(state, response));
 };

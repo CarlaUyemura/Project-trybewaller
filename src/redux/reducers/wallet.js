@@ -10,7 +10,8 @@ const INITIAL_STATE = {
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
-  const { REQUEST_COIN_SUCESS, REQUEST_COIN_FAILURE } = types;
+  const { REQUEST_COIN_SUCESS, REQUEST_COIN_FAILURE, SAVE_EXPENSES } = types;
+
   switch (action.type) {
   case REQUEST_COIN_SUCESS:
     return {
@@ -21,6 +22,12 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       error: action.error,
+    };
+  case SAVE_EXPENSES:
+    return {
+      ...state,
+      expenses:
+      [...state.expenses, { ...action.expenses, exchangeRates: action.response }],
     };
   default:
     return state;
