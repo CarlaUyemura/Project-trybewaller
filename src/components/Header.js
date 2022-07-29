@@ -10,7 +10,7 @@ class Header extends Component {
         <header>
           <h2 data-testid="email-field">{email}</h2>
           <h2 data-testid="total-field">{`Despesa total R$${0.00}`}</h2>
-          <span data-testid="header-currency-field">BRL</span>
+          <h2 data-testid="header-currency-field">BRL</h2>
         </header>
       </div>
     );
