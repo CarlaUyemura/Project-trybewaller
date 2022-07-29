@@ -15,7 +15,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case REQUEST_COIN_SUCESS:
     return {
       ...state,
-      currencies: action.currencies,
+      currencies: Object.keys(action.currencies).filter((coin) => coin !== 'USDT'),
     };
   case REQUEST_COIN_FAILURE:
     return {

@@ -20,8 +20,7 @@ export const requestCoinFailure = (error) => ({
 export const fetchApi = () => async (dispatch) => {
   try {
     const response = await coinApi();
-    const array = Object.keys(response).filter((coin) => coin !== 'USDT');
-    dispatch(requestCoinSucess(array));
+    dispatch(requestCoinSucess(response));
   } catch (error) {
     dispatch(requestCoinFailure(error));
   }
