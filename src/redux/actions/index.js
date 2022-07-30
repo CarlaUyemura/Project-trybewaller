@@ -23,6 +23,11 @@ export const saveExpenses = (expenses, response) => ({
   response,
 });
 
+export const deleteExpenses = (expenses) => ({
+  type: types.DELETE_EXPENSES,
+  expenses,
+});
+
 export const fetchApi = () => async (dispatch) => {
   try {
     const response = await coinApi();
