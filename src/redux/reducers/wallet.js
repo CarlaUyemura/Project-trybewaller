@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   editor: false,
   idToEdit: 0,
   error: '',
+  edit: false,
 };
 
 const wallet = (state = INITIAL_STATE, action) => {
@@ -14,7 +15,10 @@ const wallet = (state = INITIAL_STATE, action) => {
     REQUEST_COIN_SUCESS,
     REQUEST_COIN_FAILURE,
     SAVE_EXPENSES,
-    DELETE_EXPENSES } = types;
+    DELETE_EXPENSES,
+    EDIT_EXPENSE,
+    CHANGE_BUTTON,
+  } = types;
 
   switch (action.type) {
   case REQUEST_COIN_SUCESS:
@@ -31,13 +35,26 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses:
-      [...state.expenses, { ...action.expenses, exchangeRates: action.response }],
+      [{ ...action.expenses, exchangeRates: action.response }, ...state.expenses],
     };
 
   case DELETE_EXPENSES:
     return {
       ...state,
       expenses: action.expenses,
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      expenses: action.expenses,
+      editExpense: action.editExpense,
+      edit: true,
+    };
+  case CHANGE_BUTTON:
+    return {
+      ...state,
+      // expenses: [...action.expenses, action.editExpense],
+      edit: false,
     };
   default:
     return state;

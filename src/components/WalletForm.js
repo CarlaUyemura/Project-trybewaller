@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchApi, fetchExpense } from '../redux/actions';
+import { fetchApi, fetchExpense, changeButton } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -25,8 +25,20 @@ class WalletForm extends Component {
     this.setState({ [target.id]: target.value });
   };
 
+  teste = () => {
+    const { editExpense } = this.props;
+    this.setState({
+      id: editExpense.id,
+      value: editExpense.value,
+      description: editExpense.description,
+      tag: editExpense.tag,
+      method: editExpense.method,
+      currency: editExpense.currency,
+    });
+  }
+
   render() {
-    const { currencies, expenses } = this.props;
+    const { currencies, expensesFetch, edit, changeButtonDisp } = this.props;
     const { value, description, tag, method, currency } = this.state;
     return (
       <div>
@@ -99,7 +111,7 @@ class WalletForm extends Component {
         <button
           type="button"
           onClick={ () => {
-            expenses(this.state);
+            expensesFetch(this.state);
             this.setState((prev) => ({
               id: prev.id + 1,
               value: '',
@@ -108,9 +120,10 @@ class WalletForm extends Component {
               method: 'Dinheiro',
               currency: 'USD',
             }));
+            changeButtonDisp();
           } }
         >
-          Adicionar despesa
+          {edit ? ['Editar despesa'] : 'Adicionar despesa'}
 
         </button>
       </div>
@@ -127,12 +140,18 @@ WalletForm.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   fetch: () => dispatch(fetchApi()),
-  expenses: (state) => dispatch(fetchExpense(state)),
+  expensesFetch: (state) => dispatch(fetchExpense(state)),
+  changeButtonDisp: (expenses, editExpense) => dispatch(
+    changeButton(expenses, editExpense),
+  ),
 });
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
   dataCoin: state.wallet.dataCoin,
+  edit: state.wallet.edit,
+  editExpense: state.wallet.editExpense,
+  expenses: state.wallet.expenses,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);

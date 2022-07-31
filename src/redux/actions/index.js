@@ -28,6 +28,19 @@ export const deleteExpenses = (expenses) => ({
   expenses,
 });
 
+export const editExpenseAction = (expenses, editExpense) => ({
+  type: types.EDIT_EXPENSE,
+  expenses,
+  editExpense,
+});
+
+export const changeButton = () => ({
+  type: types.CHANGE_BUTTON,
+  // expenses,
+  // editExpense,
+  edit: false,
+});
+
 export const fetchApi = () => async (dispatch) => {
   try {
     const response = await coinApi();

@@ -11,6 +11,7 @@ class Header extends Component {
           <h2 data-testid="email-field">{email}</h2>
           <h2 data-testid="total-field">
             {
+
               expenses.value === 0 ? 0.00 : expenses.reduce((acc, cur) => {
                 parseFloat(acc += (cur.exchangeRates[cur.currency].ask * cur.value));
                 return acc;
@@ -36,6 +37,8 @@ Header.propTypes = {
 const mapStateToProps = (state) => ({
   email: state.user.email,
   expenses: state.wallet.expenses,
+  editExpense: state.wallet.expenses,
+  edit: state.wallet.edit,
 });
 
 export default connect(mapStateToProps, null)(Header);

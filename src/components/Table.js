@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deleteExpenses } from '../redux/actions/index';
+import { deleteExpenses, editExpenseAction } from '../redux/actions/index';
 
 class Table extends Component {
   deleteAndDispatch = ({ target }) => {
@@ -11,11 +11,18 @@ class Table extends Component {
     newExpenses(newArray);
   }
 
+  editAndDispatch = ({ target }) => {
+    const { expenses, editExpense } = this.props;
+    const expense = expenses.find((item) => item.id === Number(target.id));
+    const othersExpenses = expenses.filter((item) => item.id !== Number(target.id))
+      .map((elem) => elem);
+    editExpense(othersExpenses, expense);
+  }
+
   render() {
     const { expenses } = this.props;
     return (
       <div>
-        Table
         <table>
           <thead>
             <tr>
@@ -57,7 +64,15 @@ class Table extends Component {
                     </td>
                     <td>Real</td>
                     <td>
-                      <button type="button">Editar</button>
+                      <button
+                        type="button"
+                        data-testid="edit-btn"
+                        id={ id }
+                        onClick={ this.editAndDispatch }
+                      >
+                        Editar
+
+                      </button>
                       <button
                         id={ id }
                         type="button"
@@ -88,9 +103,13 @@ Table.propTypes = {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
+  editExpense: state.wallet.editExpense,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   newExpenses: (expenses) => dispatch(deleteExpenses(expenses)),
+  editExpense: (otherExpenses, expense) => dispatch(
+    editExpenseAction(otherExpenses, expense),
+  ),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Table);
