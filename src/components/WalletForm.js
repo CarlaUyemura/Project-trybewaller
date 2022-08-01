@@ -72,7 +72,7 @@ class WalletForm extends Component {
   }
 
   render() {
-    const { currencies, expensesFetch, edit, changeButtonDisp, editExpense } = this.props;
+    const { currencies, edit } = this.props;
     const { value, description, tag, method, currency } = this.state;
     return (
       <div>
