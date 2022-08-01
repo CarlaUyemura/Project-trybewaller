@@ -35,7 +35,7 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses:
-      [{ ...action.expenses, exchangeRates: action.response }, ...state.expenses],
+      [...state.expenses, { ...action.expenses, exchangeRates: action.response }],
     };
 
   case DELETE_EXPENSES:
@@ -53,7 +53,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case CHANGE_BUTTON:
     return {
       ...state,
-      // expenses: [...action.expenses, action.editExpense],
+      // expenses: action.expenses,
       edit: false,
     };
   default:

@@ -25,20 +25,54 @@ class WalletForm extends Component {
     this.setState({ [target.id]: target.value });
   };
 
-  teste = () => {
-    const { editExpense } = this.props;
-    this.setState({
-      id: editExpense.id,
-      value: editExpense.value,
-      description: editExpense.description,
-      tag: editExpense.tag,
-      method: editExpense.method,
-      currency: editExpense.currency,
-    });
+  // teste = () => {
+  //   const { editExpense } = this.props;
+  //   this.setState({
+  //     id: editExpense.id,
+  //     value: editExpense.value,
+  //     description: editExpense.description,
+  //     tag: editExpense.tag,
+  //     method: editExpense.method,
+  //     currency: editExpense.currency,
+  //   });
+  // }
+
+  newExpenseEdit = () => {
+    const { expensesFetch, edit, changeButtonDisp, editExpense } = this.props;
+    const {
+      value,
+      description,
+      tag,
+      method,
+      currency,
+    } = this.state;
+    if (edit) {
+      const newObj = {
+        id: editExpense.id,
+        value,
+        description,
+        currency,
+        method,
+        tag,
+      };
+      expensesFetch(newObj);
+      console.log('entrei', newObj);
+    } else {
+      expensesFetch(this.state);
+      changeButtonDisp();
+    }
+    this.setState((prev) => ({
+      id: prev.id + 1,
+      value: '',
+      description: '',
+      tag: 'Lazer',
+      method: 'Dinheiro',
+      currency: 'USD',
+    }));
   }
 
   render() {
-    const { currencies, expensesFetch, edit, changeButtonDisp } = this.props;
+    const { currencies, expensesFetch, edit, changeButtonDisp, editExpense } = this.props;
     const { value, description, tag, method, currency } = this.state;
     return (
       <div>
@@ -110,18 +144,9 @@ class WalletForm extends Component {
         </form>
         <button
           type="button"
-          onClick={ () => {
-            expensesFetch(this.state);
-            this.setState((prev) => ({
-              id: prev.id + 1,
-              value: '',
-              description: '',
-              tag: 'Lazer',
-              method: 'Dinheiro',
-              currency: 'USD',
-            }));
-            changeButtonDisp();
-          } }
+          onClick={
+            this.newExpenseEdit
+          }
         >
           {edit ? ['Editar despesa'] : 'Adicionar despesa'}
 

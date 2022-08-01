@@ -39,6 +39,7 @@ class Login extends React.Component {
       <div>
         Login
         <label htmlFor="email">
+          Email:
           <input
             type="email"
             id="email"
