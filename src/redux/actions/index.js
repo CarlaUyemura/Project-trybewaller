@@ -36,8 +36,6 @@ export const editExpenseAction = (expenses, editExpense) => ({
 
 export const changeButton = () => ({
   type: types.CHANGE_BUTTON,
-  // expenses,
-  // editExpense,
   edit: false,
 });
 

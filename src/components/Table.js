@@ -17,7 +17,6 @@ class Table extends Component {
     const othersExpenses = expenses.filter((item) => item.id !== Number(target.id))
       .map((elem) => elem);
     editExpense(othersExpenses, expense);
-    // test(othersExpenses);
   }
 
   render() {
@@ -112,6 +111,5 @@ const mapDispatchToProps = (dispatch) => ({
   editExpense: (otherExpenses, expense) => dispatch(
     editExpenseAction(otherExpenses, expense),
   ),
-  // test: (expenses) => dispatch(changeButton(expenses)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

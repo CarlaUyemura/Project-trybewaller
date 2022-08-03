@@ -53,7 +53,6 @@ const wallet = (state = INITIAL_STATE, action) => {
   case CHANGE_BUTTON:
     return {
       ...state,
-      // expenses: action.expenses,
       edit: false,
     };
   default:

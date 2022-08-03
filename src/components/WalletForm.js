@@ -25,18 +25,6 @@ class WalletForm extends Component {
     this.setState({ [target.id]: target.value });
   };
 
-  // teste = () => {
-  //   const { editExpense } = this.props;
-  //   this.setState({
-  //     id: editExpense.id,
-  //     value: editExpense.value,
-  //     description: editExpense.description,
-  //     tag: editExpense.tag,
-  //     method: editExpense.method,
-  //     currency: editExpense.currency,
-  //   });
-  // }
-
   newExpenseEdit = () => {
     const { expensesFetch, edit, changeButtonDisp, editExpense } = this.props;
     const {
@@ -56,7 +44,6 @@ class WalletForm extends Component {
         tag,
       };
       expensesFetch(newObj);
-      console.log('entrei', newObj);
     } else {
       expensesFetch(this.state);
       changeButtonDisp();
