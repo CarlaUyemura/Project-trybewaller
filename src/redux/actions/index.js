@@ -12,11 +12,6 @@ export const requestCoinSucess = (currencies) => ({
   currencies,
 });
 
-export const requestCoinFailure = (error) => ({
-  type: types.REQUEST_COIN_FAILURE,
-  error,
-});
-
 export const saveExpenses = (expenses, response) => ({
   type: types.SAVE_EXPENSES,
   expenses,
@@ -40,12 +35,8 @@ export const changeButton = () => ({
 });
 
 export const fetchApi = () => async (dispatch) => {
-  try {
-    const response = await coinApi();
-    dispatch(requestCoinSucess(response));
-  } catch (error) {
-    dispatch(requestCoinFailure(error));
-  }
+  const response = await coinApi();
+  dispatch(requestCoinSucess(response));
 };
 
 export const fetchExpense = (state) => async (dispatch) => {

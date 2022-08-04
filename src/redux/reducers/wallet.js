@@ -13,7 +13,6 @@ const INITIAL_STATE = {
 const wallet = (state = INITIAL_STATE, action) => {
   const {
     REQUEST_COIN_SUCESS,
-    REQUEST_COIN_FAILURE,
     SAVE_EXPENSES,
     DELETE_EXPENSES,
     EDIT_EXPENSE,
@@ -25,11 +24,6 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       currencies: Object.keys(action.currencies).filter((coin) => coin !== 'USDT'),
-    };
-  case REQUEST_COIN_FAILURE:
-    return {
-      ...state,
-      error: action.error,
     };
   case SAVE_EXPENSES:
     return {
