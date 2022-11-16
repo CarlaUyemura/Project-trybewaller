@@ -75,13 +75,27 @@ describe('Testa o componente Wallet', () => {
     const initialState = {
       wallet: {
         currencies: mockCoins,
-        expenses: [],
+        expenses: [
+          {
+            id:0,
+            value:"10",
+            description:"Lanche",
+            tag:"Alimentação",
+            method:"Dinheiro",
+            currency:"USD",
+            exchangeRates: mockData,
+          }
+        ],
       }
     }
-    renderWithRedux(<Wallet />, {initialState})
+    renderWithRedux(<Wallet />, {initialState});
+
+    const total = screen.getByTestId("total-field");
+    expect(total).toHaveTextContent('47.53');
     
     const titles = ['Descrição', 'Tag', 'Método de pagamento','Valor', 'Moeda', 'Câmbio utilizado', 'Valor convertido', 'Moeda de conversão', 'Editar/Excluir']
-    titles.map((e) => expect(screen.getByRole('columnheader', { name: e })).toBeInTheDocument())
+    titles.map((e) => expect(screen.getByRole('columnheader', { name: e })).toBeInTheDocument());
+
     const value = screen.getByRole('spinbutton', {name: /valor/i })
     userEvent.type(value, 10)
 
@@ -97,11 +111,12 @@ describe('Testa o componente Wallet', () => {
     const tag = screen.getAllByRole("combobox")[2];
     userEvent.selectOptions(tag, 'Lazer');
 
-    const buttonAdd = screen.getByRole('button', { name: /adicionar despesa/i })
+    const buttonAdd = screen.getByRole('button', { name: /adicionar despesa/i });
     userEvent.click(buttonAdd);
 
-    const food = await screen.findByText('lanche')
-    expect(food).toBeInTheDocument()
+    const food = await screen.findByText('lanche');
+
+    expect(food).toBeInTheDocument();
 
   })
   test('Verifica se o botão de editar funcionam corretamente', async () => {
@@ -112,25 +127,25 @@ describe('Testa o componente Wallet', () => {
         currencies: mockCoins,
         expenses: [
           {
-          id:0,
-          value:"10",
-          description:"Lanche",
-          tag:"Alimentação",
-          method:"Dinheiro",
-          currency:"USD",
-          exchangeRates: mockData,
-        },
-        {
-          id:1,
-          value:"50",
-          description:"Jantar",
-          currency:"USD",
-          method:"Cartão de crédito",
-          tag:"Alimentação",
-          exchangeRates: mockData,
-        },
-        {
-          id:2,
+            id:0,
+            value:"10",
+            description:"Lanche",
+            tag:"Alimentação",
+            method:"Dinheiro",
+            currency:"USD",
+            exchangeRates: mockData,
+          },
+          {
+            id:1,
+            value:"50",
+            description:"Jantar",
+            currency:"USD",
+            method:"Cartão de crédito",
+            tag:"Alimentação",
+            exchangeRates: mockData,
+          },
+          {
+            id:2,
           value:"100",
           description:"Games",
           tag:"Lazer",
@@ -142,9 +157,8 @@ describe('Testa o componente Wallet', () => {
       }
     }
     renderWithRedux(<Wallet />, {initialState})
-
     const buttonEdit = screen.getAllByRole('button', { name: /editar/i });
-  
+    
     const expense1 = screen.getByText(/jantar/i) 
     userEvent.click(buttonEdit[1]);
   
@@ -216,6 +230,5 @@ describe('Testa o componente Wallet', () => {
   userEvent.click(buttonExcluir[1]);
   expect(total).toHaveTextContent('0.00')
   expect(foodJantar).not.toBeInTheDocument();
-  screen.logTestingPlaygroundURL();
   });
 });

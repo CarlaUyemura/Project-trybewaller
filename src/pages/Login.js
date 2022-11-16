@@ -37,37 +37,56 @@ class Login extends React.Component {
     const { save, history } = this.props;
     return (
       <div>
-        Login
-        <label htmlFor="email">
-          <input
-            type="email"
-            id="email"
-            placeholder="Digite seu email"
-            data-testid="email-input"
-            value={ email }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            type="password"
-            id="password"
-            placeholder="Digite uma senha"
-            data-testid="password-input"
-            value={ password }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <button
-          type="button"
-          disabled={ buttonDisabled }
-          onClick={ () => {
-            save(email);
-            history.push('/carteira');
-          } }
-        >
-          Entrar
-        </button>
+        <div className="container-logo">
+          <h1 className="title">TrybeWallet</h1>
+          <img src="https://futureintermediacoes.com.br/wp-content/uploads/2018/01/carteira-contas-pagar.png" alt="logo-carteira" className="img-logo" />
+        </div>
+        <div className="box">
+          <form>
+            <span className="text-center">Login</span>
+            <div className="input-container">
+
+              <input
+                type="email"
+                id="email"
+                // placeholder="Digite seu email"
+                data-testid="email-input"
+                value={ email }
+                onChange={ this.handleChange }
+              />
+              <label htmlFor="email">
+                {' '}
+                Email
+              </label>
+            </div>
+            <div className="input-container">
+
+              <input
+                type="password"
+                id="password"
+                // placeholder="Digite uma senha"
+                data-testid="password-input"
+                value={ password }
+                onChange={ this.handleChange }
+              />
+              <label htmlFor="password">
+                {' '}
+                Password
+              </label>
+            </div>
+            <button
+              type="button"
+              disabled={ buttonDisabled }
+              onClick={ () => {
+                save(email);
+                history.push('/carteira');
+              } }
+              className="btn"
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

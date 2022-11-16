@@ -63,10 +63,9 @@ class WalletForm extends Component {
     const { value, description, tag, method, currency } = this.state;
     return (
       <div>
-        WalletForm
-        <form>
+        <section className="container-input-wallet">
+
           <label htmlFor="value">
-            Valor
             <input
               id="value"
               type="number"
@@ -74,16 +73,19 @@ class WalletForm extends Component {
               value={ value }
               onChange={ this.handleChange }
               step=",01"
+              placeholder="Digite o valor da despesa"
+              className="input-wallet"
             />
           </label>
           <label htmlFor="description">
-            Descrição
             <input
               id="description"
               type="text"
               data-testid="description-input"
               value={ description }
               onChange={ this.handleChange }
+              placeholder="Digite a descrição"
+              className="input-wallet"
             />
           </label>
           <select
@@ -91,6 +93,7 @@ class WalletForm extends Component {
             data-testid="currency-input"
             value={ currency }
             onChange={ this.handleChange }
+            className="input-wallet"
           >
 
             {
@@ -111,6 +114,7 @@ class WalletForm extends Component {
             data-testid="method-input"
             value={ method }
             onChange={ this.handleChange }
+            className="input-wallet"
           >
             <option value="Dinheiro">Dinheiro</option>
             <option value="Cartão de crédito">Cartão de crédito</option>
@@ -121,6 +125,7 @@ class WalletForm extends Component {
             data-testid="tag-input"
             value={ tag }
             onChange={ this.handleChange }
+            className="input-wallet"
           >
             <option value="Alimentação">Alimentação</option>
             <option value="Lazer">Lazer</option>
@@ -128,16 +133,18 @@ class WalletForm extends Component {
             <option value="Transporte">Transporte</option>
             <option value="Saúde">Saúde</option>
           </select>
-        </form>
-        <button
-          type="button"
-          onClick={
-            this.newExpenseEdit
-          }
-        >
-          {edit ? ['Editar despesa'] : 'Adicionar despesa'}
 
-        </button>
+          <button
+            type="button"
+            className="btn-add"
+            onClick={
+              this.newExpenseEdit
+            }
+          >
+            {edit ? ['Editar despesa'] : 'Adicionar despesa'}
+
+          </button>
+        </section>
       </div>
     );
   }

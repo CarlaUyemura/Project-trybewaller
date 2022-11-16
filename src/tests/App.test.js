@@ -17,6 +17,7 @@ describe('Testa o componente Login', () => {
   });
   test('Se o botão é ativado com o email válido e a senha maior que 6 dígitos e se ao clicar em entrar é redirecionado para pagina /carteira', () => {
     const {history} = renderWithRouterAndRedux(<App />);
+    
     const inputEmail = screen.getByPlaceholderText(/digite seu email/i);
     userEvent.type(inputEmail, 'teste@trybe.com')
     const inputPassword = screen.getByPlaceholderText(/digite uma senha/i);

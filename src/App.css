@@ -1,41 +1,261 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&subset=greek-ext') ;
+
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  align-items: center;
-  background-color: #282c34;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
+body {
+  background-color: rgb(242, 244, 243);
+  background-origin: content-box;
+  background-position: center;
+  font-family: Noto Sans, sans-serif;
   min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+/* Parte do css do login utilizei deste site https://codepen.io/nikstech/pen/xmMxpr */
+.text-center {
+  color: rgb(242, 244, 243);
+  display: block;
+  font-size: 35px;
+  margin: -50px 0 80px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-@keyframes App-logo-spin {
+.box {
+  background-color: rgba(0, 0, 0, 0.89);
+  border-radius: 5px;
+  left: 50%;
+  padding: 70px 100px;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.input-container {
+  margin-bottom: 25px;
+  position: relative;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.input-container label {
+  color: rgb(242, 244, 243);
+  font-size: 16px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.input-container input {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #555;
+  color: rgb(242, 244, 243);
+  font-size: 26px;
+  padding: 20px 0 5px;
+  width: 100%;
+}
+
+.input-container input:focus {
+  border: none;
+  border-bottom: 1px solid rgb(98, 60, 234);
+  outline: none;
+}
+
+.btn {
+  background-color: rgb(98, 60, 234);
+  border: 0;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  margin-left: 115px;
+  margin-top: 50px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+}
+
+.input-container input:focus ~ label , .input-container input:valid ~ label {
+  font-size: 20px;
+  top: -20px;
+}
+
+.title {
+  color: rgb(98, 60, 234);
+  font-size: 70px;
+  font-weight: 900;
+}
+
+.img-logo {
+  width: 100px;
+}
+
+.container-logo {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.container-form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.img-logo-header {
+  height: 50px;
+  width: 50px;
+}
+
+.title-header {
+  color: rgb(98, 60, 234);
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.container-header {
+  margin: 0;
+}
+
+header {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.89);
+  color: rgb(242, 244, 243);
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.container-logo-header {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
+}
+
+.container-total {
+  display: flex;
+  font-size: 20px;
+  gap: 7px;
+  margin: 30px 20px;
+}
+
+.container-input-wallet {
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+  justify-content: space-evenly;
+}
+
+.input-wallet {
+  background-color: rgba(0, 0, 0, 0.89);
+  border: 0;
+  border-radius: 5px;
+  color: rgb(242, 244, 243);
+  font-size: 25px;
+  padding: 10px;
+}
+
+select.input-wallet {
+  width: 310px;
+}
+
+.btn-add {
+  background-color: rgb(98, 60, 234);
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+  height: 50px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+}
+
+.btn-add:hover {
+  background-color: rgb(109, 78, 222);
+}
+
+
+tr {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+
+th {
+  align-items: center;
+  background-color: rgb(73, 17, 28);
+  border: 2px solid;
+  color: rgb(242, 244, 243);
+  display: flex;
+  font-size: 20px;
+  height: 50px;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 20px 5px;
+  width: 195px;
+}
+
+td {
+  align-items: center;
+  border: 2px solid white;
+  display: flex;
+  font-size: 20px;
+  height: 50px;
+  justify-content: center;
+  padding: 20px 5px;
+  text-align: center;
+  width: 195px;
+}
+
+tr:nth-child( even ) {
+  background-color: rgb(110, 103, 95);
+  color: rgb(242, 244, 243);
+}
+
+.container-table {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-edit {
+  background-color: rgb(98, 60, 234);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.btn-excluir {
+  background-color: rgb(73, 17, 28);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 20px;
+  padding: 5px 10px;
+  text-transform: uppercase;
+}
+
+.container-btn {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.icon-desp {
+  width: 50px;
 }

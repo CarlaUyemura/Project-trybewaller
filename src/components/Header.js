@@ -6,10 +6,20 @@ class Header extends Component {
   render() {
     const { email, expenses } = this.props;
     return (
-      <div>
+      <div className="container-header">
         <header>
-          <h2 data-testid="email-field">{email}</h2>
+          <h2 data-testid="email-field">
+            {email}
+          </h2>
+          <div className="container-logo-header">
+            <h1 className="title-header">TrybeWallet</h1>
+            <img src="https://futureintermediacoes.com.br/wp-content/uploads/2018/01/carteira-contas-pagar.png" alt="logo-carteira" className="img-logo-header" />
+          </div>
+        </header>
+        <div className="container-total">
           <h2 data-testid="total-field">
+            {' '}
+            Total das despesas: R$
             {
 
               expenses.value === 0 ? 0.00 : expenses.reduce((acc, cur) => {
@@ -20,7 +30,8 @@ class Header extends Component {
 
           </h2>
           <h2 data-testid="header-currency-field">BRL</h2>
-        </header>
+          <img src="https://cdn-icons-png.flaticon.com/512/781/781760.png" alt="icon-despesa" className="icon-desp" />
+        </div>
       </div>
     );
   }

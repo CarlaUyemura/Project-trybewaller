@@ -22,7 +22,7 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <div>
+      <div className="container-table">
         <table>
           <thead>
             <tr>
@@ -50,25 +50,28 @@ class Table extends Component {
                   exchangeRates,
                 }) => (
                   <tr key={ id }>
-                    <td>{description}</td>
-                    <td>{tag}</td>
-                    <td>{method}</td>
-                    <td>{parseFloat(value).toFixed(2)}</td>
-                    <td>{exchangeRates[currency].name}</td>
-                    <td>{parseFloat(exchangeRates[currency].ask).toFixed(2)}</td>
-                    <td>
+                    <td id="description">{description}</td>
+                    <td id="tag">{tag}</td>
+                    <td id="method">{method}</td>
+                    <td id="value">{parseFloat(value).toFixed(2)}</td>
+                    <td id="coin">{exchangeRates[currency].name}</td>
+                    <td id="cambio">
+                      {parseFloat(exchangeRates[currency].ask).toFixed(2)}
+                    </td>
+                    <td id="conversao">
                       {
                         parseFloat(exchangeRates[currency].ask * value).toFixed(2)
                       }
 
                     </td>
-                    <td>Real</td>
-                    <td>
+                    <td id="real">Real</td>
+                    <td className="container-btn">
                       <button
                         type="button"
                         data-testid="edit-btn"
                         id={ id }
                         onClick={ this.editAndDispatch }
+                        className="btn-edit"
                       >
                         Editar
 
@@ -78,6 +81,7 @@ class Table extends Component {
                         type="button"
                         data-testid="delete-btn"
                         onClick={ this.deleteAndDispatch }
+                        className="btn-excluir"
                       >
                         Excluir
 
